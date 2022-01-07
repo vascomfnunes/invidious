@@ -5,6 +5,7 @@ require 'rest-client'
 require 'tty-prompt'
 
 INSTANCE_URL = 'https://invidious.snopyta.org'
+PLAYER = ENV['PLAYER'] || 'mpv'
 
 @page = 1
 
@@ -51,7 +52,7 @@ def play(option)
   option.each do |e|
     clear_screen
     puts "Playing: #{e[:title]}"
-    system("mpv --really-quiet #{INSTANCE_URL}/watch?v=#{e[:videoId]}")
+    system("#{PLAYER} #{INSTANCE_URL}/watch?v=#{e[:videoId]}")
   end
 end
 

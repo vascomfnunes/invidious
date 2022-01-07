@@ -5,7 +5,7 @@ instance.
 
 Invidious instances are listed [here](https://api.invidious.io/).
 
-By default it will use
+By default, it will use
 [https://invidious.snopyta.org](https://invidious.snopyta.org) but you can
 change the instance URL changing the `INSTANCE_URL` constant on the top of the
 script.
@@ -27,19 +27,28 @@ gem install 'rest-client'
 gem install 'tty-prompt'
 ```
 
-### MPV
+### Player
 
-The script uses `mpv` to play the videos. On `macOS`, for example, you can
-install
-`mpv` using:
+The script uses any player installed in the system and able to stream
+YouTube videos (e.g. `mpv` or `IINA`). It defaults to `mpv` if none is defined.
+
+The player binary path is expected as an
+environment variable that you can export in your shell like so:
 
 ```bash
-brew install mpv
+export PLAYER='~/Applications/IINA.app/Contents/MacOS/iina-cli --pip'
 ```
+
+#### IINA issues (macOS only)
+
+IINA has at the moment some [issues](https://github.com/iina/iina/issues/3524) when using `youtube-dl`. A workaround is
+to install [yt-dlp](https://github.com/yt-dlp/yt-dlp) and soft symlink it to
+`youtube-dl`. Don't forget to adjust `youtube-dl` symlinked path in IINA
+preferences.
 
 ## Usage
 
-Just fire up the script on the terminal typing:
+Just fire up the script at the terminal typing:
 
 ```bash
 ./invidious
@@ -51,7 +60,7 @@ On the search prompt you can exit by typing `quit` and pressing `enter`.
 
 On the results pages, you can use the `arrow keys` to navigate through the
 results, `spacebar` to select a video and `enter` to play the selected videos.
-You can select multiple videos and they will play in order.
+You can select multiple videos, and they will play in order.
 
 To load the next results page press `n`. Press `p` to load the previous one.
 
