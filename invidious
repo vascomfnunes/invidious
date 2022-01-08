@@ -37,7 +37,7 @@ end
 def search
   @page = 1
   header
-  prompt = TTY::Prompt.new
+  prompt = TTY::Prompt.new(interrupt: :exit)
 
   @query = prompt.ask('Search: ') do |q|
     q.required true
@@ -60,7 +60,7 @@ def list
   clear_screen
   puts 'Loading...'
   response = get_from_api(@query, @page)
-  @prompt = TTY::Prompt.new
+  @prompt = TTY::Prompt.new(interrupt: :exit)
 
   loop do
     header
